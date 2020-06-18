@@ -1,0 +1,33 @@
+{% extends 'dailyapp/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1 class="center">Dzień {{ day.count }}</h1>
+    {% if training_form %}
+    <form method="POST" id="training">
+    {% csrf_token %}
+    {{training_form.as_p}}
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">check</i>
+      </button>
+    </form>
+    <form method="POST" id="comment">
+        {% csrf_token %}
+        {{comment_form.as_p}}
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">check</i>
+          </button>
+    </form>
+    {% else %}
+    <h2>Brak treningu tego dnia</h2>
+    {% endif %}
+    <form method="POST" id="weight">
+    {% csrf_token %}
+    {{weight_form.as_p}}
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">check</i>
+      </button>
+    </form>
+</div>
+<script src="{% static 'forms.js' %}"></script>
+{% endblock %}

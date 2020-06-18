@@ -1,0 +1,56 @@
+{% extends 'dailyapp/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2>Weight over time</h2>
+    <div id="weightChartContainer" style="height: 300px; width: 100%;"></div>
+</div>
+<div class="container">
+    <h2>Training results</h2>
+    <div class="input-field col s6">
+    <form method="POST">
+        {% csrf_token %}
+        <select name="exercises" id="exercise">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="bench_press">Bench press</option>
+            <option value="barbell_ohp">Barbell OHP</option>
+            <option value="dips">Dips</option>
+            <option value="chest_fly">Chest fly</option>
+            <option value="triceps_pressdown">Triceps pressdown</option>
+            <option value="deadlift">Deadlift</option>
+            <option value="pull_up">Pull up</option>
+            <option value="dumbell_row">Dumbell row</option>
+            <option value="barbell_curl">Barbell curl</option>
+            <option value="squat">Squat</option>
+            <option value="stiff_legged_deadlift">Stiff-legged deadlift</option>
+            <option value="lunges">Lunges</option>
+            <option value="calf_raises">Calf raises</option>
+            <option value="incline_press">Incline press</option>
+            <option value="dumbell_ohp">Dumbell OHP</option>
+            <option value="chin_up">Chin up</option>
+            <option value="barbell_row">Barbell row</option>
+            <option value="lying_dumbell_extension">Lying dumbell extension</option>
+            <option value="incline_dumbell_curl">Incline dumbell curl</option>
+            <option value="hammer_curl">Hammer curl</option>
+            <option value="lateral_raise">Lateral raise</option>
+            <option value="facepull">Facepull</option>
+            <option value="hollow_body">Hollow body</option>
+            <option value="weighted_crunches">Weighted crunches</option>
+            <option value="cable_crunch">Cable crunch</option>
+            <option value="woodchoppers">Woodchoppers</option>
+            <option value="russian_twist">Russian twist</option>
+            <label>Exercise</label>
+        </select>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Display
+        </button>
+    </form>
+    </div>
+    <div id="exerciseChartContainer" style="height: 300px; width: 100%;"></div>
+</div>
+
+<script>
+    weight_data = {{weight_data|safe}}
+    exercise_data = {{ exercise_data|safe }}
+    exercise = '{{ exercise|safe }}'
+</script>
+{% endblock %}

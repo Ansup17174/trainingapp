@@ -1,0 +1,15 @@
+.box {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+div {
+    background-color: white;
+}
+
+form.center {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}

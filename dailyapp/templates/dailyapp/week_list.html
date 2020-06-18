@@ -1,0 +1,57 @@
+{% extends 'dailyapp/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2 class="center">Tydzień {{ week.count }}</h2>
+    {% if week.is_valid %}
+    <form action="{% url 'dailyapp:main_view' %}" method="POST" class="center">
+        {% csrf_token %}
+        <button class="btn waves-effect waves-light" type="submit" name="action">New week
+        </button>
+    </form>
+    {% endif %}
+</div>
+<div class="container">
+        <div class="row">
+            {% for day in days %}
+            <a href="{% url 'dailyapp:day_view' day.pk %}">
+            <div class="col s3">
+                <div class="card z-depth-2" style="height: 305px;">
+                    <div class="card-content blue white-text">
+                        <span>Dzień {{day.count}}</span>
+                    </div>
+                    <div class="card-content black-text">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                            {% if day.training %}
+                                {% if day.training.is_done %}
+                                Trening uzupełniony
+                                {% else %}
+                                Trening do wypełnienia
+                                {% endif %}
+                                {% else %}
+                                Brak treningu tego dnia
+                                {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                {% if day.weight %}
+                                {{day.weight}} kg
+                                {% else %}
+                                Waga do wypełnienia
+                            {% endif %}
+                            </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+</div>
+{% endblock %}
